@@ -1,6 +1,17 @@
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 
-export const ContactList = ({ list, serchName, onDelete }) => {
+import { delContactAction } from '../../redux/actions';
+
+export const ContactList = () => {
+  const dispatch = useDispatch();
+
+  const list = useSelector(state => state.items);
+  const serchName = useSelector(state => state.filter);
+  const handledeleteContacts = itemId => {
+    dispatch(delContactAction(itemId));
+  };
+
   return (
     <ul>
       {list.length ? (
@@ -16,7 +27,10 @@ export const ContactList = ({ list, serchName, onDelete }) => {
                 <li key={el.id}>
                   <p>{el.name}</p>
                   <p>{el.number}</p>
-                  <button type="button" onClick={() => onDelete(el.id)}>
+                  <button
+                    type="button"
+                    onClick={() => handledeleteContacts(el.id)}
+                  >
                     Delete
                   </button>
                 </li>
