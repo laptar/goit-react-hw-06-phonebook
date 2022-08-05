@@ -28,8 +28,8 @@ export const ContactForm = () => {
       alert(`${name} is already in contacts`);
     } else {
       dispatch(addContactAction({ name, number, id }));
+      reset();
     }
-    reset();
   };
   const reset = () => {
     setName('');
