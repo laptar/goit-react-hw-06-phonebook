@@ -1,11 +1,8 @@
-import { ADD_CONTACT, FILTER_CONTACT, DEL_CONTACT } from './type';
+import { createAction } from '@reduxjs/toolkit';
+import { nanoid } from 'nanoid';
 
-export const delContactAction = id => ({ type: DEL_CONTACT, payload: id });
-export const addContactAction = contact => ({
-  type: ADD_CONTACT,
-  payload: contact,
-});
-export const filterContactAction = str => ({
-  type: FILTER_CONTACT,
-  payload: str,
-});
+export const addContactAction = createAction('addContact', obj => ({
+  payload: { ...obj, id: nanoid() },
+}));
+export const filterContactAction = createAction('filterContact');
+export const delContactAction = createAction('deleteContact');

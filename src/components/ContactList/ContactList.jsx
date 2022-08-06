@@ -1,24 +1,24 @@
-import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { delContactAction } from '../../redux/actions';
+import { contactsListSelector, searchNameSelector } from 'redux/selectors';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
 
-  const list = useSelector(state => state.items);
-  const serchName = useSelector(state => state.filter);
+  const contacts = useSelector(contactsListSelector);
+  const serchName = useSelector(searchNameSelector);
   const handledeleteContacts = itemId => {
     dispatch(delContactAction(itemId));
   };
 
   return (
     <ul>
-      {list.length ? (
-        list.filter(({ name }) =>
+      {contacts.length ? (
+        contacts.filter(({ name }) =>
           name.toLowerCase().includes(serchName.toLowerCase())
         ).length ? (
-          list
+          contacts
             .filter(({ name }) =>
               name.toLowerCase().includes(serchName.toLowerCase())
             )
@@ -44,10 +44,4 @@ export const ContactList = () => {
       )}
     </ul>
   );
-};
-
-ContactList.propTypes = {
-  list: PropTypes.arrayOf(PropTypes.object),
-  serchName: PropTypes.string,
-  onDelete: PropTypes.func,
 };

@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { filterContactAction } from '../../redux/actions';
+import { searchNameSelector } from 'redux/selectors';
 
 export const Filter = () => {
   const dispatch = useDispatch();
-  const serchName = useSelector(state => state.filter);
+  const serchName = useSelector(searchNameSelector);
 
   const handleChangeInput = e => {
     dispatch(filterContactAction(e.target.value));
@@ -22,9 +22,4 @@ export const Filter = () => {
       />
     </label>
   );
-};
-
-Filter.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func,
 };
